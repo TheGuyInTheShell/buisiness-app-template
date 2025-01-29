@@ -6,7 +6,6 @@ from modules.restaurant.tables.reservations.models import Reservation
 
 class Table(BaseAsync):
     __tablename__ = 'tables'
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     table_number: Mapped[Optional[int]]
     capacity: Mapped[Optional[int]]
     status: Mapped[Optional[str]]

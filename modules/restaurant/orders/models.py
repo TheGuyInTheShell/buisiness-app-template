@@ -1,10 +1,22 @@
 from sqlalchemy.orm import Mapped, mapped_column
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 import enum
 from sqlalchemy import Enum, Numeric, ForeignKey, DateTime
 from core.database.base import BaseAsync
 from sqlalchemy.orm import relationship
 
+if TYPE_CHECKING:
+    from modules.restaurant.customers.models import Customer
+    from modules.restaurant.tables.models import Table
+    from modules.restaurant.orders.order_items.models import OrderItem
+    from modules.restaurant.revenue.models import Revenue
+    from modules.restaurant.delivery.models import Delivery
+
+class PaymentMethod(enum.Enum):
+    cash = "cash"
+    credit_card = "credit_card"
+    debit_card = "debit_card"
+    digital_wallet = "digital_wallet"
 
 # Enumerations
 class OrderStatus(enum.Enum):
@@ -21,7 +33,6 @@ class OrderType(enum.Enum):
 
 class Order(BaseAsync):
     __tablename__ = 'orders'
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     customer_id: Mapped[Optional[int]] = mapped_column(ForeignKey('customers.id'))
     order_type: Mapped[Optional[OrderType]] = mapped_column(Enum(OrderType))
     order_date: Mapped[Optional[DateTime]]

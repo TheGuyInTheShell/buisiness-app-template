@@ -1,11 +1,13 @@
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, relationship
 from core.database.base import BaseAsync
 from sqlalchemy import Numeric, Text
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from modules.restaurant.orders.order_items.models import OrderItem
 
 class MenuItem(BaseAsync):
     __tablename__ = 'menu_items'
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     name: Mapped[Optional[str]]
     description: Mapped[Optional[Text]]
     price: Mapped[Optional[Numeric]]

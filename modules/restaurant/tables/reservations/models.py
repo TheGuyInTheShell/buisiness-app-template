@@ -9,7 +9,6 @@ from modules.restaurant.tables.models import Table
 
 class Reservation(BaseAsync):
     __tablename__ = 'reservations'
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     customer_id: Mapped[Optional[int]] = mapped_column(ForeignKey('customers.id'))
     table_id: Mapped[Optional[int]] = mapped_column(ForeignKey('tables.id'))
     reservation_time: Mapped[Optional[DateTime]]
