@@ -1,8 +1,10 @@
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from core.database.base import BaseAsync
-from modules.restaurant.orders.models import Order
-from modules.restaurant.tables.reservations.models import Reservation
+
+if TYPE_CHECKING:
+    from modules.restaurant.orders.models import Order
+    from modules.restaurant.tables.reservations.models import Reservation
 
 class Table(BaseAsync):
     __tablename__ = 'tables'

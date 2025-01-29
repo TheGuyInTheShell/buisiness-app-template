@@ -8,8 +8,6 @@ if TYPE_CHECKING:
     from modules.restaurant.orders.models import Order
     from modules.restaurant.tables.reservations.models import Reservation
 
-from modules.restaurant.orders.models import Order
-
 class Customer(BaseAsync):
     __tablename__ = 'customers'
     name: Mapped[Optional[str]]

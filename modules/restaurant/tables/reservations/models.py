@@ -1,11 +1,13 @@
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 from sqlalchemy import (
      DateTime, ForeignKey
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from core.database.base import BaseAsync
-from modules.restaurant.customers.models import Customer
-from modules.restaurant.tables.models import Table
+
+if TYPE_CHECKING:
+    from modules.restaurant.customers.models import Customer
+    from modules.restaurant.tables.models import Table
 
 class Reservation(BaseAsync):
     __tablename__ = 'reservations'
