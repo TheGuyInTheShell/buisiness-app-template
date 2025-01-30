@@ -4,8 +4,8 @@ from core.database.base import BaseAsync
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from modules.restaurant.orders.models import Order
-    from modules.restaurant.employee.models import Employee
+    from modules.buisiness.orders.models import Order
+    from modules.buisiness.employee.models import Employee
 
 class Delivery(BaseAsync):
     __tablename__ = 'deliveries'

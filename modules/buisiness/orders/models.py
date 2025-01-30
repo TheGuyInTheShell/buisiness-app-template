@@ -6,11 +6,11 @@ from core.database.base import BaseAsync
 from sqlalchemy.orm import relationship
 
 if TYPE_CHECKING:
-    from modules.restaurant.customers.models import Customer
-    from modules.restaurant.tables.models import Table
-    from modules.restaurant.orders.order_items.models import OrderItem
-    from modules.restaurant.revenue.models import Revenue
-    from modules.restaurant.delivery.models import Delivery
+    from modules.buisiness.customers.models import Customer
+    from modules.buisiness.tables.models import Table
+    from modules.buisiness.orders.order_items.models import OrderItem
+    from modules.buisiness.revenue.models import Revenue
+    from modules.buisiness.delivery.models import Delivery
 
 class PaymentMethod(enum.Enum):
     cash = "cash"

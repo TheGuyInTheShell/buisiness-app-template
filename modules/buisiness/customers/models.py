@@ -5,8 +5,8 @@ from core.database.base import BaseAsync
 from sqlalchemy.orm import relationship
 
 if TYPE_CHECKING:
-    from modules.restaurant.orders.models import Order
-    from modules.restaurant.tables.reservations.models import Reservation
+    from modules.buisiness.orders.models import Order
+    from modules.buisiness.tables.reservations.models import Reservation
 
 class Customer(BaseAsync):
     __tablename__ = 'customers'

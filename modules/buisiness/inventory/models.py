@@ -4,7 +4,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from core.database.base import BaseAsync
-from modules.restaurant.inventory.supliers.models import Supplier
+from modules.buisiness.inventory.supliers.models import Supplier
 
 class Inventory(BaseAsync):
     __tablename__ = 'inventory'

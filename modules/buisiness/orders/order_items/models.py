@@ -7,8 +7,8 @@ from core.database.base import BaseAsync
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from modules.restaurant.orders.models import Order
-    from modules.restaurant.menu_item.models import MenuItem
+    from modules.buisiness.orders.models import Order
+    from modules.buisiness.menu_item.models import MenuItem
 
 
 class OrderItem(BaseAsync):

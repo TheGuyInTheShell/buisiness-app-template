@@ -4,7 +4,7 @@ from sqlalchemy import Numeric, Text
 from typing import Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from modules.restaurant.orders.order_items.models import OrderItem
+    from modules.buisiness.orders.order_items.models import OrderItem
 
 class MenuItem(BaseAsync):
     __tablename__ = 'menu_items'

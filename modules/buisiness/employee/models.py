@@ -6,7 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from core.database.base import BaseAsync
 
 if TYPE_CHECKING:
-    from modules.restaurant.delivery.models import Delivery
+    from modules.buisiness.delivery.models import Delivery
 
 class Employee(BaseAsync):
     __tablename__ = 'employees'
