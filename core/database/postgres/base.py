@@ -189,6 +189,19 @@ class BaseAsync(DeclarativeBase):
     async def find_by_specification(cls, db: AsyncSession, specification: dict):
         result = (await db.execute(select(cls).where(**specification)))
         return result
+    
+    @classmethod
+    async def search(cls, db: AsyncSession, search: str):
+        db: AsyncSession = await get_async_db()
+        str_fields = [column for column in cls.__table__.columns if column.type.python_type == str]
+        search = search.lower()
+        base_query = select(cls)
+        for field in str_fields:
+            base_query = base_query.where(field.ilike(f'%{search}%'))
+        base_query = base_query.where(cls.is_deleted == False)
+        base_query = base_query.order_by(desc(cls.created_at)).limit(10)
+        result = (await db.execute(base_query)).scalars().all()
+        return result
 
 
 class BaseSync(DeclarativeBase):

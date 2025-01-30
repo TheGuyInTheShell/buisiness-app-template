@@ -14,7 +14,6 @@ class Customer(BaseAsync):
     phone: Mapped[Optional[str]]
     email: Mapped[Optional[str]]
     address: Mapped[Optional[str]]
-    created_at: Mapped[Optional[DateTime]]
 
     orders: Mapped[list['Order']] = relationship('Order', back_populates='customer')
     reservations: Mapped[list['Reservation']] = relationship('Reservation', back_populates='customer')
