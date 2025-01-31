@@ -13,7 +13,7 @@ router = APIRouter()
 tag = 'customers'
 
 @router.get("id/{id}", response_model=RSCustomer, status_code=200, tags=[tag])
-async def get_Permission(id: str, db: AsyncSession = Depends(get_async_db)) -> RSCustomer:
+async def get_customer(id: str, db: AsyncSession = Depends(get_async_db)) -> RSCustomer:
     try:
         result = await Customer.find_one(db, id)
         return result
@@ -23,7 +23,7 @@ async def get_Permission(id: str, db: AsyncSession = Depends(get_async_db)) -> R
 
 
 @router.get("/", response_model=RSCustomerList, status_code=200, tags=[tag])
-async def get_Permissions(
+async def get_customers(
     pag: Optional[int] = 1,
     ord: Literal["asc", "desc"] = "asc",
     status: Literal["deleted", "exists", "all"] = "exists",
@@ -55,7 +55,7 @@ async def get_Permissions(
 
 
 @router.post("/", response_model=RSCustomer, status_code=201, tags=[tag])
-async def create_Permission(
+async def create_customer(
     menu: RQCustomer, db: AsyncSession = Depends(get_async_db)
 ) -> RSCustomer:
     try:
@@ -67,7 +67,7 @@ async def create_Permission(
 
 
 @router.delete("id/{id}", status_code=204, tags=[tag])
-async def delete_Permission(id: str, db: AsyncSession = Depends(get_async_db)) -> None:
+async def delete_customer(id: str, db: AsyncSession = Depends(get_async_db)) -> None:
     try:
         await Customer.delete(db, id)
     except Exception as e:
@@ -76,7 +76,7 @@ async def delete_Permission(id: str, db: AsyncSession = Depends(get_async_db)) -
 
 
 @router.put("id/{id}", response_model=RSCustomer, status_code=200, tags=[tag])
-async def update_Permission(
+async def update_customer(
     id: str, menu: RQCustomer, db: AsyncSession = Depends(get_async_db)
 ) -> RSCustomer:
     try:
@@ -87,7 +87,7 @@ async def update_Permission(
         raise e
 
 @router.get("/search", response_model=RSCustomerList, status_code=200, tags=[tag])
-async def search_Permission(
+async def search_customer(
     search: str,
     pag: Optional[int] = 1,
     ord: Literal["asc", "desc"] = "asc",

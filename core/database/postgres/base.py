@@ -162,7 +162,7 @@ class BaseAsync(DeclarativeBase):
         return result
     
     @classmethod
-    async def find_some(cls, db: AsyncSession, pag: int = 1, ord: str = 'asc', status: Literal["deleted", "exists", "all"] = 'all', filters: Set[ColumnElement] = ()) -> List[Self]:
+    async def find_some(cls, db: AsyncSession, pag: int = 1, ord: str = 'asc', status: Literal["deleted", "exists", "all"] = 'all', filters = {}) -> List[Self]:
         base_query =  select(cls).filter_by(**filters)
         if status == 'deleted':
             base_query = cls.get_deleted().select().filter_by(**filters)
