@@ -1,17 +1,12 @@
-from typing import Optional
 from sqlalchemy import (
-    Numeric, ForeignKey
+    Column, ForeignKey, String, Integer
 )
-from sqlalchemy.orm import Mapped, mapped_column, relationship
 from core.database.base import BaseAsync
-from modules.buisiness.inventory.supliers.models import Supplier
 
 class Inventory(BaseAsync):
     __tablename__ = 'inventory'
-    item_name: Mapped[Optional[str]]
-    quantity: Mapped[Optional[Numeric]]
-    unit: Mapped[Optional[str]]
-    reorder_level: Mapped[Optional[Numeric]]
-    supplier_id: Mapped[Optional[int]] = mapped_column(ForeignKey('suppliers.id'))
-
-    supplier: Mapped['Supplier'] = relationship('Supplier', back_populates='inventory_items')
+    item_name = Column(String)
+    quantity = Column(String)
+    unit = Column(String)
+    reorder_level = Column(String)
+    supplier_id = Column(Integer, ForeignKey('suppliers.id'))

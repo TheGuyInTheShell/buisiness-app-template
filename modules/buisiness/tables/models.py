@@ -1,16 +1,9 @@
-from typing import Optional, TYPE_CHECKING
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import String, Integer, Column
 from core.database.base import BaseAsync
-
-if TYPE_CHECKING:
-    from modules.buisiness.orders.models import Order
-    from modules.buisiness.tables.reservations.models import Reservation
 
 class Table(BaseAsync):
     __tablename__ = 'tables'
-    table_number: Mapped[Optional[int]]
-    capacity: Mapped[Optional[int]]
-    status: Mapped[Optional[str]]
 
-    orders: Mapped[list['Order']] = relationship('Order', back_populates='table')
-    reservations: Mapped[list['Reservation']] = relationship('Reservation', back_populates='table')
+    table_number = Column(Integer)
+    capacity = Column(Integer)
+    status = Column(String)

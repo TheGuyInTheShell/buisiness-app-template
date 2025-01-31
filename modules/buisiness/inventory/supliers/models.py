@@ -1,9 +1,7 @@
-from typing import Optional
-from sqlalchemy.orm import Mapped
+from sqlalchemy import Column, String
 from core.database.base import BaseAsync
-
 
 class Supplier(BaseAsync):
     __tablename__ = 'suppliers'
-    name: Mapped[Optional[str]]
-    contact: Mapped[Optional[str]]
+    name = Column(String)
+    contact = Column(String)

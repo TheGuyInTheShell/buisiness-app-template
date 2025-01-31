@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.database import get_async_db
 
-from .models import Menu
+from .models import MenuItems as Menu
 from .schemas import RQMenu, RSMenu, RSMenuList
 
 # prefix /menu

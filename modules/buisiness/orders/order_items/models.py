@@ -1,22 +1,13 @@
-from typing import Optional
 from sqlalchemy import (
-    Numeric, ForeignKey
+    Column, ForeignKey, Integer, String
 )
-from sqlalchemy.orm import Mapped, mapped_column, relationship
 from core.database.base import BaseAsync
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from modules.buisiness.orders.models import Order
-    from modules.buisiness.menu_item.models import MenuItem
-
-
-class OrderItem(BaseAsync):
+class OrderItems(BaseAsync):
     __tablename__ = 'order_items'
-    order_id: Mapped[Optional[int]] = mapped_column(ForeignKey('orders.id'))
-    menu_item_id: Mapped[Optional[int]] = mapped_column(ForeignKey('menu_items.id'))
-    quantity: Mapped[Optional[int]]
-    subtotal: Mapped[Optional[Numeric]]
 
-    order: Mapped['Order'] = relationship('Order', back_populates='order_items')
-    menu_item: Mapped['MenuItem'] = relationship('MenuItem', back_populates='order_items')
+    order_id = Column(Integer, ForeignKey('orders.id'))
+    menu_item_id = Column(Integer, ForeignKey('menu_items.id'))
+    quantity = Column(Integer)
+    subtotal = Column(String)
+
