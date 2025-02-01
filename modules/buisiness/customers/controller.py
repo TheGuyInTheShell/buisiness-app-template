@@ -1,4 +1,5 @@
 from typing import Literal, Optional
+from core.services.generic_controller import get_some
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -30,25 +31,17 @@ async def get_customers(
     db: AsyncSession = Depends(get_async_db),
 ) -> RSCustomerList:
     try:
-        result = await Customer.find_some(db, pag, ord, status)
-        keys = RSCustomer.model_fields.keys()
-        result = map(
-            lambda x: RSCustomer(
-                **{key: getattr(x, key) for key in keys}
-            ),
-            result,
-        )
-        return RSCustomerList(
-            data=list(result),
-            total=0,
-            page=0,
-            page_size=0,
-            total_pages=0,
-            has_next=False,
-            has_prev=False,
-            next_page=0,
-            prev_page=0,
-        )
+        result = await get_some(
+            db=db,
+            Model=Customer,
+            Schema=RSCustomer,
+            SchemaList=RSCustomerList,
+            query={
+                "page": pag,
+                "order": ord,
+                "status": status,
+            })
+        return result
     except Exception as e:
         print(e)
         raise e
