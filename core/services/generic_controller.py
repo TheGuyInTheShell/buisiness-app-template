@@ -1,11 +1,16 @@
 from core.database.base import BaseAsync
 from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import BaseModel
-from typing import TypeVar, Union
+from typing import TypeVar, Union, Dict
 
 
 T = TypeVar('T')
 U = TypeVar('U')
+
+class QueryType(Dict):
+    pag: int
+    ord: str
+    status: str
 
 
 async def get_some(
@@ -13,11 +18,10 @@ async def get_some(
     Schema: Union[T, BaseModel],
     SchemaList: Union[U, BaseModel],
     db: AsyncSession,
-    **query
+    **query: QueryType
 ) ->  U: 
         """
         Fetches a paginated list of records from the database based on the provided filters.
-
         Args:
             Model (BaseAsync): The SQLAlchemy model class representing the database table.
             Schema (BaseModel): The Pydantic schema for validating and serializing individual records.
