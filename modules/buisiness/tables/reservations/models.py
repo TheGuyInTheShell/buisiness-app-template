@@ -11,8 +11,8 @@ if TYPE_CHECKING:
 
 class Reservation(BaseAsync):
     __tablename__ = 'reservations'
-    customer_id: Mapped[Optional[int]] = mapped_column(ForeignKey('customers.id'))
-    table_id: Mapped[Optional[int]] = mapped_column(ForeignKey('tables.id'))
+    customer_id: Mapped[Optional[int]] = mapped_column(ForeignKey('customers.uid'))
+    table_id: Mapped[Optional[int]] = mapped_column(ForeignKey('tables.uid'))
     reservation_time: Mapped[Optional[DateTime]]
     party_size: Mapped[Optional[int]]
 

@@ -9,4 +9,4 @@ class Inventory(BaseAsync):
     quantity = Column(String)
     unit = Column(String)
     reorder_level = Column(String)
-    supplier_id = Column(Integer, ForeignKey('suppliers.id'))
+    supplier_id = Column(Integer, ForeignKey('suppliers.uid'))
