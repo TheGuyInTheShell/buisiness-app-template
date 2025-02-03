@@ -1,5 +1,5 @@
 from sqlalchemy import (
-    Column, ForeignKey, String, Integer
+    Column, ForeignKey, String
 )
 from core.database.base import BaseAsync
 
@@ -9,4 +9,4 @@ class Inventory(BaseAsync):
     quantity = Column(String)
     unit = Column(String)
     reorder_level = Column(String)
-    supplier_id = Column(Integer, ForeignKey('suppliers.uid'))
+    supplier_id = Column(String, ForeignKey('suppliers.uid'))

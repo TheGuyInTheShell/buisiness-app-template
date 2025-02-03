@@ -9,8 +9,8 @@ from core.database import get_async_db
 from .models import Delivery
 from .schemas import RQDelivery, RSDelivery, RSDeliveryList
 
-# prefix /customers
-router = APIRouter(tags = ['customers'])
+# prefix /deliveries
+router = APIRouter(tags = ['deliveries'])
 
 @router.get("id/{id}", response_model=RSDelivery, status_code=200)
 async def get_customer(id: str, db: AsyncSession = Depends(get_async_db)) -> RSDelivery:
