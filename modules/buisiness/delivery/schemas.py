@@ -13,5 +13,5 @@ class RQDelivery(BaseModel):
 class RSDelivery(RQDelivery):
     uid: str
 
-class RSCustomerList(Pagination):
+class RSDeliveryList(Pagination):
     data: list[RSDelivery] | List = []
