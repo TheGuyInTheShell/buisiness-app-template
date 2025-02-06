@@ -9,5 +9,5 @@ class Order(BaseAsync):
     order_date = Column(DateTime)
     total_amount = Column(String)
     status = Column(Enum('pending', 'in_progress', 'completed', 'cancelled', name='order_status'))
-    payment_method = Column(Enum('cash', 'credit_card', 'debit_card', 'digital_wallet', name='payment_method'))
+    payment_method = Column(Enum('cash', 'credit_card', 'debit_card', 'transference ', name='payment_method'))
     table_id = Column(String, ForeignKey('tables.uid'))
