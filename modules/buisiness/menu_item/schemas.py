@@ -3,22 +3,28 @@ from typing import List
 from pydantic import BaseModel
 
 
-class RQMenu(BaseModel):
+"""
+name = Column(String)
+    description = Column(Text)
+    price = Column(String)
+    category = Column(String)
+    is_available = Column(Boolean)
+"""
+
+
+class RQMenuItem(BaseModel):
     name: str
-    type_menu: str
-    file_route: str
-    active: bool = True
+    description: str
+    prrice: str
+    category: str
+    is_available: bool
 
 
-class RSMenu(BaseModel):
+class RSMenuItem(RQMenuItem):
     uid: str
-    name: str
-    type_menu: str
-    file_route: str
-    active: bool
 
-class RSMenuList(BaseModel):
-    data: list[RSMenu] | List = []
+class RSMenuTimeList(BaseModel):
+    data: list[RSMenuItem] | List = []
     total: int = 0
     page: int = 0
     page_size: int = 0
