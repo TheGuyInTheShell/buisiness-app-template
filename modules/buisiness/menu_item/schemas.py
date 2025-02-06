@@ -23,7 +23,7 @@ class RQMenuItem(BaseModel):
 class RSMenuItem(RQMenuItem):
     uid: str
 
-class RSMenuTimeList(BaseModel):
+class RSMenuItemList(BaseModel):
     data: list[RSMenuItem] | List = []
     total: int = 0
     page: int = 0
