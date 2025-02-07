@@ -18,7 +18,7 @@ from pydantic import BaseModel
 """
 
 
-class RQMenuItem(BaseModel):
+class RQOrders(BaseModel):
     customer_id: str
     order_type: str
     order_date: datetime
@@ -27,11 +27,11 @@ class RQMenuItem(BaseModel):
     payment_method: str 
 
 
-class RSMenuItem(RQMenuItem):
+class RSOrders(RQOrders):
     uid: str
 
-class RSMenuItemList(BaseModel):
-    data: list[RSMenuItem] | List = []
+class RSOrdersList(BaseModel):
+    data: list[RSOrders] | List = []
     total: int = 0
     page: int = 0
     page_size: int = 0

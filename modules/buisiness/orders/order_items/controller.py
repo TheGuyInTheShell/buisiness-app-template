@@ -7,14 +7,14 @@ from core.database import get_async_db
 from core.services.generic_controller import get_some
 
 from .models import Order
-from .schemas import RQOrders, RSOrders, RSOrdersList
+from .schemas import RQMenuItem, RSMenuItem, RSMenuItemList
 
 # prefix /menu
 router = APIRouter()
 tag = 'menu'
 
-@router.get("/id/{id}", response_model=RSOrders, status_code=200, tags=[tag])
-async def get_order(id: str, db: AsyncSession = Depends(get_async_db)) -> RSOrders:
+@router.get("/id/{id}", response_model=RSMenuItem, status_code=200, tags=[tag])
+async def get_Permission(id: str, db: AsyncSession = Depends(get_async_db)) -> RSMenuItem:
     try:
         result = await Order.find_one(db, id)
         return result
@@ -23,18 +23,18 @@ async def get_order(id: str, db: AsyncSession = Depends(get_async_db)) -> RSOrde
         raise e
 
 
-@router.get("/", response_model=RSOrdersList, status_code=200, tags=[tag])
-async def get_orders(
+@router.get("/", response_model=RSMenuItemList, status_code=200, tags=[tag])
+async def get_Permissions(
     pag: Optional[int] = 1,
     ord: Literal["asc", "desc"] = "asc",
     status: Literal["deleted", "exists", "all"] = "exists",
     db: AsyncSession = Depends(get_async_db),
-) -> RSOrdersList:
+) -> RSMenuItemList:
     try:
         result = await get_some(
             Order,
-            RQOrders,
-            RSOrdersList,
+            RQMenuItem,
+            RSMenuItemList,
             db,
             query={
                 "pag": pag,
@@ -48,10 +48,10 @@ async def get_orders(
         raise e
 
 
-@router.post("/", response_model=RSOrders, status_code=201, tags=[tag])
-async def create_order(
-    menu: RQOrders, db: AsyncSession = Depends(get_async_db)
-) -> RSOrders:
+@router.post("/", response_model=RSMenuItem, status_code=201, tags=[tag])
+async def create_Permission(
+    menu: RQMenuItem, db: AsyncSession = Depends(get_async_db)
+) -> RSMenuItem:
     try:
         result = await Order(**menu.model_dump()).save(db)
         return result
@@ -61,7 +61,7 @@ async def create_order(
 
 
 @router.delete("/id/{id}", status_code=204, tags=[tag])
-async def delete_order(id: str, db: AsyncSession = Depends(get_async_db)) -> None:
+async def delete_Permission(id: str, db: AsyncSession = Depends(get_async_db)) -> None:
     try:
         await Order.delete(db, id)
     except Exception as e:
@@ -69,10 +69,10 @@ async def delete_order(id: str, db: AsyncSession = Depends(get_async_db)) -> Non
         raise e
 
 
-@router.put("/id/{id}", response_model=RSOrders, status_code=200, tags=[tag])
-async def update_order(
-    id: str, menu: RQOrders, db: AsyncSession = Depends(get_async_db)
-) -> RSOrders:
+@router.put("/id/{id}", response_model=RSMenuItem, status_code=200, tags=[tag])
+async def update_Permission(
+    id: str, menu: RQMenuItem, db: AsyncSession = Depends(get_async_db)
+) -> RSMenuItem:
     try:
         result = await Order.update(db, id, menu.model_dump())
         return result
