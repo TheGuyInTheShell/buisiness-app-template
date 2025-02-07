@@ -1,13 +1,14 @@
 from sqlalchemy import (
-    Column, ForeignKey, Integer, String
+    Column, ForeignKey, String, 
 )
+from sqlalchemy.dialects.mysql import INTEGER
 from core.database.base import BaseAsync
 
-class OrderItems(BaseAsync):
+class OrderItem(BaseAsync):
     __tablename__ = 'order_items'
 
     order_id = Column(String, ForeignKey('orders.uid'))
     menu_item_id = Column(String, ForeignKey('menu_items.uid'))
-    quantity = Column(Integer)
+    quantity = Column(INTEGER(unsigned=True), default=1, nullable=False, )
     subtotal = Column(String)
 

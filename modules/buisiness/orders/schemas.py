@@ -17,6 +17,9 @@ from pydantic import BaseModel
 
 """
 
+from core.schemas import Pagination
+
+
 
 class RQOrders(BaseModel):
     customer_id: str
@@ -30,13 +33,5 @@ class RQOrders(BaseModel):
 class RSOrders(RQOrders):
     uid: str
 
-class RSOrdersList(BaseModel):
+class RSOrdersList(Pagination):
     data: list[RSOrders] | List = []
-    total: int = 0
-    page: int = 0
-    page_size: int = 0
-    total_pages: int = 0
-    has_next: bool = False
-    has_prev: bool = False
-    next_page: int = 0
-    prev_page: int = 0

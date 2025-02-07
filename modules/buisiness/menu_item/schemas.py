@@ -10,6 +10,7 @@ name = Column(String)
     category = Column(String)
     is_available = Column(Boolean)
 """
+from core.schemas import Pagination
 
 
 class RQMenuItem(BaseModel):
@@ -23,13 +24,5 @@ class RQMenuItem(BaseModel):
 class RSMenuItem(RQMenuItem):
     uid: str
 
-class RSMenuItemList(BaseModel):
+class RSMenuItemList(Pagination):
     data: list[RSMenuItem] | List = []
-    total: int = 0
-    page: int = 0
-    page_size: int = 0
-    total_pages: int = 0
-    has_next: bool = False
-    has_prev: bool = False
-    next_page: int = 0
-    prev_page: int = 0

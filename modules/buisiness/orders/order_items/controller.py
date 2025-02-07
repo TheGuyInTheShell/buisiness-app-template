@@ -6,35 +6,35 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from core.database import get_async_db
 from core.services.generic_controller import get_some
 
-from .models import Order
-from .schemas import RQMenuItem, RSMenuItem, RSMenuItemList
+from .models import OrderItem
+from .schemas import RQOrderItem, RSOrderItem, RSOrderItemList
 
-# prefix /menu
+# prefix /order_item
 router = APIRouter()
-tag = 'menu'
+tag = 'order_item'
 
-@router.get("/id/{id}", response_model=RSMenuItem, status_code=200, tags=[tag])
-async def get_Permission(id: str, db: AsyncSession = Depends(get_async_db)) -> RSMenuItem:
+@router.get("id/{id}", response_model=RSOrderItem, status_code=200, tags=[tag])
+async def get_order_item(id: str, db: AsyncSession = Depends(get_async_db)) -> RSOrderItem:
     try:
-        result = await Order.find_one(db, id)
+        result = await OrderItem.find_one(db, id)
         return result
     except Exception as e:
         print(e)
         raise e
 
 
-@router.get("/", response_model=RSMenuItemList, status_code=200, tags=[tag])
-async def get_Permissions(
+@router.get("/", response_model=RSOrderItemList, status_code=200, tags=[tag])
+async def get_order_items(
     pag: Optional[int] = 1,
     ord: Literal["asc", "desc"] = "asc",
     status: Literal["deleted", "exists", "all"] = "exists",
     db: AsyncSession = Depends(get_async_db),
-) -> RSMenuItemList:
+) -> RSOrderItemList:
     try:
         result = await get_some(
-            Order,
-            RQMenuItem,
-            RSMenuItemList,
+            OrderItem,
+            RQOrderItem,
+            RSOrderItemList,
             db,
             query={
                 "pag": pag,
@@ -48,33 +48,33 @@ async def get_Permissions(
         raise e
 
 
-@router.post("/", response_model=RSMenuItem, status_code=201, tags=[tag])
-async def create_Permission(
-    menu: RQMenuItem, db: AsyncSession = Depends(get_async_db)
-) -> RSMenuItem:
+@router.post("/", response_model=RSOrderItem, status_code=201, tags=[tag])
+async def create_order_item(
+    order_item: RQOrderItem, db: AsyncSession = Depends(get_async_db)
+) -> RSOrderItem:
     try:
-        result = await Order(**menu.model_dump()).save(db)
+        result = await OrderItem(**order_item.model_dump()).save(db)
         return result
     except Exception as e:
         print(e)
         raise e
 
 
-@router.delete("/id/{id}", status_code=204, tags=[tag])
-async def delete_Permission(id: str, db: AsyncSession = Depends(get_async_db)) -> None:
+@router.delete("id/{id}", status_code=204, tags=[tag])
+async def delete_order_item(id: str, db: AsyncSession = Depends(get_async_db)) -> None:
     try:
-        await Order.delete(db, id)
+        await OrderItem.delete(db, id)
     except Exception as e:
         print(e)
         raise e
 
 
-@router.put("/id/{id}", response_model=RSMenuItem, status_code=200, tags=[tag])
-async def update_Permission(
-    id: str, menu: RQMenuItem, db: AsyncSession = Depends(get_async_db)
-) -> RSMenuItem:
+@router.put("id/{id}", response_model=RSOrderItem, status_code=200, tags=[tag])
+async def update_order_item(
+    id: str, order_item: RQOrderItem, db: AsyncSession = Depends(get_async_db)
+) -> RSOrderItem:
     try:
-        result = await Order.update(db, id, menu.model_dump())
+        result = await OrderItem.update(db, id, order_item.model_dump())
         return result
     except Exception as e:
         print(e)

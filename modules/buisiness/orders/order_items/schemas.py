@@ -14,27 +14,18 @@ class OrderItems(BaseAsync):
     subtotal = Column(String)
 
 """
+from core.schemas import Pagination
 
 
-class RQMenuItem(BaseModel):
-    customer_id: str
-    order_type: str
-    order_date: datetime
-    total_amount: str
-    status: str
-    payment_method: str 
+class RQOrderItem(BaseModel):
+    order_id: str
+    menu_item_id: str
+    quantity: int
+    subtotal: str
 
 
-class RSMenuItem(RQMenuItem):
+class RSOrderItem(RQOrderItem):
     uid: str
 
-class RSMenuItemList(BaseModel):
-    data: list[RSMenuItem] | List = []
-    total: int = 0
-    page: int = 0
-    page_size: int = 0
-    total_pages: int = 0
-    has_next: bool = False
-    has_prev: bool = False
-    next_page: int = 0
-    prev_page: int = 0
+class RSOrderItemList(Pagination):
+    data: list[RSOrderItem] | List = []
