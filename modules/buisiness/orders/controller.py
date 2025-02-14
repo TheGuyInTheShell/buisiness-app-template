@@ -13,7 +13,7 @@ from .schemas import RQOrders, RSOrders, RSOrdersList
 router = APIRouter()
 tag = 'menu'
 
-@router.get("/id/{id}", response_model=RSOrders, status_code=200, tags=[tag])
+@router.get("id/{id}", response_model=RSOrders, status_code=200, tags=[tag])
 async def get_order(id: str, db: AsyncSession = Depends(get_async_db)) -> RSOrders:
     try:
         result = await Order.find_one(db, id)
@@ -60,7 +60,7 @@ async def create_order(
         raise e
 
 
-@router.delete("/id/{id}", status_code=204, tags=[tag])
+@router.delete("id/{id}", status_code=204, tags=[tag])
 async def delete_order(id: str, db: AsyncSession = Depends(get_async_db)) -> None:
     try:
         await Order.delete(db, id)
@@ -69,7 +69,7 @@ async def delete_order(id: str, db: AsyncSession = Depends(get_async_db)) -> Non
         raise e
 
 
-@router.put("/id/{id}", response_model=RSOrders, status_code=200, tags=[tag])
+@router.put("id/{id}", response_model=RSOrders, status_code=200, tags=[tag])
 async def update_order(
     id: str, menu: RQOrders, db: AsyncSession = Depends(get_async_db)
 ) -> RSOrders:

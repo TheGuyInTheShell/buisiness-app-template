@@ -13,7 +13,7 @@ from .schemas import RQMenuItem, RSMenuItem, RSMenuItemList
 router = APIRouter()
 tag = 'menu'
 
-@router.get("/id/{id}", response_model=RSMenuItem, status_code=200, tags=[tag])
+@router.get("id/{id}", response_model=RSMenuItem, status_code=200, tags=[tag])
 async def get_Permission(id: str, db: AsyncSession = Depends(get_async_db)) -> RSMenuItem:
     try:
         result = await Menu.find_one(db, id)
@@ -60,7 +60,7 @@ async def create_Permission(
         raise e
 
 
-@router.delete("/id/{id}", status_code=204, tags=[tag])
+@router.delete("id/{id}", status_code=204, tags=[tag])
 async def delete_Permission(id: str, db: AsyncSession = Depends(get_async_db)) -> None:
     try:
         await Menu.delete(db, id)
@@ -69,7 +69,7 @@ async def delete_Permission(id: str, db: AsyncSession = Depends(get_async_db)) -
         raise e
 
 
-@router.put("/id/{id}", response_model=RSMenuItem, status_code=200, tags=[tag])
+@router.put("id/{id}", response_model=RSMenuItem, status_code=200, tags=[tag])
 async def update_Permission(
     id: str, menu: RQMenuItem, db: AsyncSession = Depends(get_async_db)
 ) -> RSMenuItem:
